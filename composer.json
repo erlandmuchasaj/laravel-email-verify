@@ -1,0 +1,83 @@
+{
+    "name": "erlandmuchasaj/laravel-email-verify",
+    "type": "library",
+    "description": "Validate email addresses that they are valid and non disposable.",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "homepage": "https://github.com/erlandmuchasaj/laravel-email-verify",
+    "license": "MIT",
+    "keywords": [
+        "validation",
+        "Validator",
+        "laravel",
+        "verification",
+        "security",
+        "spam",
+        "disposable",
+        "mail",
+        "email",
+        "throwaway",
+        "temporary",
+        "fake"
+    ],
+    "autoload": {
+        "psr-4": {
+            "ErlandMuchasaj\\LaravelEmailVerify\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ErlandMuchasaj\\LaravelEmailVerify\\EmailVerifyServiceProvider"
+            ],
+            "aliases": {
+                "EmailVerify": "ErlandMuchasaj\\LaravelEmailVerify\\Facades\\EmailVerifyFacade"
+            }
+        }
+    },
+    "authors": [
+        {
+            "name": "Erland Muchasaj",
+            "email": "erland.muchasaj@gmail.com",
+            "homepage": "https://erlandmuchasaj.tech/",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/erlandmuchasaj/laravel-email-verify/issues",
+        "source": "https://github.com/erlandmuchasaj/laravel-email-verify",
+        "email": "erland.muchasaj@gmail.com",
+        "irc": "irc://irc.freenode.org/composer"
+    },
+    "funding": [
+        {
+            "type": "patreon",
+            "url": "https://www.patreon.com/erlandmuchasaj"
+        },
+        {
+            "type": "Ko-fi",
+            "url": "https://ko-fi.com/erlandmuchasaj"
+        },
+        {
+            "type": "PayPal",
+            "url": "https://paypal.me/emcms?country.x=AL&locale.x=en_US"
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    },
+    "require": {
+        "php": "^8.0",
+        "illuminate/config": "^9.0|^10.0|^11.0",
+        "illuminate/contracts": "^9.0|^10.0|^11.0",
+        "illuminate/http": "^9.0|^10.0|^11.0",
+        "illuminate/support": "^9.0|^10.0|^11.0",
+        "illuminate/translation": "^9.0|^10.0|^11.0",
+        "illuminate/validation": "^9.0|^10.0|^11.0"
+    }
+}
