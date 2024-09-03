@@ -9,6 +9,8 @@ return [
     |
     | This option controls the default verifier that is used to verify any email
     |
+    | Supported: "kickbox", "usercheck", "mails", "block-temporary-email", "zerobounce"
+    |            "verifyright", "mailboxvalidator", "emaillistverify"
     */
 
     'default' => env('INDISPOSABLE_SERVICE', 'kickbox'),

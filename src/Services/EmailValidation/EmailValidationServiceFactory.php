@@ -2,6 +2,7 @@
 
     namespace ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation;
 
+    use ErlandMuchasaj\LaravelEmailVerify\Exceptions\CredentialsNotFoundException;
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter\BlockTemporaryEmailService;
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter\KickboxService;
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter\MailsService;
@@ -13,6 +14,9 @@
 
     class EmailValidationServiceFactory
     {
+        /**
+         * @throws CredentialsNotFoundException
+         */
         public static function create(string $service): EmailValidationServiceInterface
         {
             $connections = config('laravel-email-verify.connections');
@@ -25,6 +29,13 @@
 
             $baseUrl = $connections[$service]['email'];
             $apiKey = $connections[$service]['key'];
+
+            // fetch the api key from the config - which allows the config to be cached
+            // throw exception if the email verify credentials are missing from the env
+            if (empty($apiKey)) {
+                // throw the custom exception defined below
+                throw new CredentialsNotFoundException('Please provide a INDISPOSABLE_KEY in your .env file.');
+            }
 
             return match ($service) {
                 'mails' => new MailsService($baseUrl, $apiKey),

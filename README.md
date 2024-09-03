@@ -22,7 +22,7 @@ php artisan vendor:publish --provider="ErlandMuchasaj\LaravelEmailVerify\EmailVe
 Now you have access to the `laravel-email-verify.php` configuration file in the `config` directory. Here you can 
  configure which service to use for email verification. Defaults to 'kickbox'.
 
-The only thing you need to pay attention to is the  `connections` key where you need to seth the token for the service you are using.
+The only thing you need to pay attention to is the  `connections` key where you need to set the token for the service you are using.
 
 ```php
 'connections' => [
@@ -35,6 +35,22 @@ The only thing you need to pay attention to is the  `connections` key where you 
         //
 
     ],
+```
+You can also change the default service to use for email verification by changing the `default` key.
+
+```php
+    /*
+    |--------------------------------------------------------------------------
+    | Default Email verifier
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the default verifier that is used to verify any email
+    |
+    | Supported: "kickbox", "usercheck", "mails", "block-temporary-email", "zerobounce"
+    |            "verifyright", "mailboxvalidator", "emaillistverify"
+    */
+
+    'default' => env('INDISPOSABLE_SERVICE', 'kickbox'),
 ```
 
 

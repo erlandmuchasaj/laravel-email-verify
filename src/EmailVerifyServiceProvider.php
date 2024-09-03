@@ -4,7 +4,6 @@ namespace ErlandMuchasaj\LaravelEmailVerify;
 
 use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Indisposable;
 use Illuminate\Support\ServiceProvider;
-use ErlandMuchasaj\LaravelEmailVerify\Exceptions\CredentialsNotFoundException;
 
 class EmailVerifyServiceProvider extends ServiceProvider
 {
@@ -54,14 +53,6 @@ class EmailVerifyServiceProvider extends ServiceProvider
 
                 if (! $isEnabled) {
                     return true;
-                }
-
-                // fetch the api key from the config - which allows the config to be cached
-                // throw exception if the email verify credentials are missing from the env
-                $apiKey = $app['config'][static::$abstract . '.api_key'];
-                if (empty($apiKey)) {
-                    // throw the custom exception defined below
-                    throw new CredentialsNotFoundException('Please provide a INDISPOSABLE_KEY in your .env file.');
                 }
 
                 // Only build and pass the requested cache store if caching is enabled.

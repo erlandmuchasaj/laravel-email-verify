@@ -2,6 +2,7 @@
 
     namespace ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation;
 
+    use ErlandMuchasaj\LaravelEmailVerify\Exceptions\CredentialsNotFoundException;
     use Illuminate\Support\Carbon;
     use Illuminate\Validation\Validator;
     use Illuminate\Contracts\Cache\Repository as Cache;
@@ -19,6 +20,9 @@
          */
         protected ?Cache $cache;
 
+        /**
+         * @throws CredentialsNotFoundException
+         */
         public function __construct(?Cache $cache = null)
         {
             $this->cache = $cache;
