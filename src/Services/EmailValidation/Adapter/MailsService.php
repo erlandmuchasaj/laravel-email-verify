@@ -6,13 +6,10 @@
     use GuzzleHttp\Utils;
     use GuzzleHttp\Exception\GuzzleException;
     use GuzzleHttp\Exception\RequestException;
-    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Concerns\Disposable;
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationServiceInterface;
 
     class MailsService implements EmailValidationServiceInterface
     {
-        use Disposable;
-
         protected string $baseUrl;
         protected string $apiKey;
         protected Client $client;
@@ -46,11 +43,6 @@
 
         public function isRealEmail(string $email): bool
         {
-            // first we check if email is in disposable list
-            if ($this->inDisposableEmailList($email)) {
-                return false;
-            }
-
             try {
                 $response = $this->initializeClient()->get('', ['query' => [
                     'email' => $email

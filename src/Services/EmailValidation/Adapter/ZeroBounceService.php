@@ -2,7 +2,6 @@
 
     namespace ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter;
 
-    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Concerns\Disposable;
     use GuzzleHttp\Client;
     use GuzzleHttp\Exception\GuzzleException;
     use GuzzleHttp\Exception\RequestException;
@@ -11,8 +10,6 @@
 
     class ZeroBounceService implements EmailValidationServiceInterface
     {
-        use Disposable;
-
         protected string $baseUrl;
         protected string $apiKey;
         protected Client $client;
@@ -45,12 +42,6 @@
 
         public function isRealEmail(string $email): bool
         {
-
-            // first we check if email is in disposable list
-            if ($this->inDisposableEmailList($email)) {
-                return false;
-            }
-
             try {
                 $response = $this->initializeClient()->get('', ['query' => [
                     'email' => $email,

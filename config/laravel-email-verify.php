@@ -46,6 +46,8 @@ return [
     | API key
     |--------------------------------------------------------------------------
     |
+    | It is better to set it on `connections.provider.key` key of the configuration file
+    |
     */
 
     'api_key' => env('INDISPOSABLE_KEY', 'live_106a7e8821e255c35b7969fc8ac557b455e6c88c896b468e2287f8f716b3472c'),
@@ -61,10 +63,20 @@ return [
     |
     */
 
-    'sources' => [
-        'https://cdn.jsdelivr.net/gh/disposable/disposable-email-domains@master/domains.json',
-    ],
+    'source' => 'https://cdn.jsdelivr.net/gh/disposable/disposable-email-domains@master/domains.json',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Storage Path
+    |--------------------------------------------------------------------------
+    |
+    | The location where the retrieved domains list should be stored locally.
+    | The path should be accessible and writable by the web server. A good
+    | place for storing the list is in the framework's own storage path.
+    |
+    */
+
+    'storage' => storage_path('framework/disposable_domains.json'),
 
     /*
     |--------------------------------------------------------------------------
@@ -83,7 +95,7 @@ return [
     'cache' => [
         'enabled' => true,
         'store' => 'default',
-        'key' => '%_disposable_email_%|email',
+        'key' => '_disposable_email_domains_',
     ],
 
     /*

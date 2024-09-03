@@ -2,6 +2,7 @@
 
 namespace ErlandMuchasaj\LaravelEmailVerify;
 
+use ErlandMuchasaj\LaravelEmailVerify\Console\UpdateDisposableDomainsCommand;
 use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Indisposable;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,7 +29,10 @@ class EmailVerifyServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../config/' . static::$abstract . '.php' => config_path(static::$abstract . '.php'),
             ], static::$abstract);
+
+            $this->commands(UpdateDisposableDomainsCommand::class);
         }
+
 
         // load translations
         $path = __DIR__.'/../lang';
