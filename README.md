@@ -12,6 +12,12 @@ You can install the package via composer:
 composer require erlandmuchasaj/laravel-email-verify
 ```
 
+## Run the command update the list of disposable domains:
+
+```bash
+php artisan email-verify:update-disposable-domains
+```
+
 ## Config file
 Publish the configuration file using artisan.
 
