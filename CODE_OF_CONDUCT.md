@@ -14,6 +14,7 @@ diverse, inclusive, and healthy community.
 
 ## Our Standards
 
+
 Examples of behavior that contributes to a positive environment for our
 community include:
 
@@ -60,7 +61,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-dave@blakey.co.
+erland.muchasaj@gmail.com.
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the

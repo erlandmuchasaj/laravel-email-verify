@@ -66,6 +66,12 @@
                 return true;
             }
 
+            // if ($response->status === 'valid' && $response->smtp_valid === true) {
+            //     // Proceed with user registration
+            // } else {
+            //     // Do not proceed with user registration
+            // }
+
             return false;
         }
 

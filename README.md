@@ -59,6 +59,26 @@ You can also change the default service to use for email verification by changin
     'default' => env('INDISPOSABLE_SERVICE', 'kickbox'),
 ```
 
+## Optionally 
+It's highly advised to update the disposable domains list regularly. You can either run the command yourself now and then or, if you make use of Laravel scheduler,
+you can register the `php artisan email-verify:update-disposable-domains` command:
+
+In `routes/console.php`:
+
+  ```php
+  use Illuminate\Support\Facades\Schedule;
+  
+  Schedule::command('email-verify:update-disposable-domains')->weekly();
+```
+
+  Or if you use Laravel 10 or below, head over to the Console kernel:
+ ```php
+  protected function schedule(Schedule $schedule)
+  {
+      $schedule->command('email-verify:update-disposable-domains')->monthly();
+  }
+```
+
 
 ## Usage
 Use validation rule `email_verify` to check that specific field does not contain a disposable email address.
