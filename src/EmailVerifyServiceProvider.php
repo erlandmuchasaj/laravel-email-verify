@@ -43,7 +43,6 @@ class EmailVerifyServiceProvider extends ServiceProvider
         // ex: __('Normal Text');
         $this->loadJsonTranslationsFrom($path);
 
-
         // register the custom validation rule after app is booted.
         $this->app->booted(function($app) {
             // get validator and translator
@@ -65,9 +64,9 @@ class EmailVerifyServiceProvider extends ServiceProvider
                     $cache = $app['cache']->store($store == 'default' ? $app['config']['cache.default'] : $store);
                 }
 
-                 $indisposable = new Indisposable($cache ?? null);
+                $indisposable = new Indisposable($cache ?? null);
 
-                 return $indisposable->validate($attribute, $value, $parameters, $validator);
+                return $indisposable->validate($attribute, $value, $parameters, $validator);
 
             }, $translator->get(static::$abstract . '::validation.email_verify'));
         });

@@ -26,6 +26,11 @@
         protected ?Cache $cache;
 
         /**
+         * @var int The duration in seconds to cache the disposable email domains list - default 30 days
+         */
+        private int $cacheDuration = 60 * 24 * 30; // Cache for 30 days min X hours X days
+
+        /**
          * @throws CredentialsNotFoundException
          */
         public function __construct(?Cache $cache = null)
@@ -64,14 +69,14 @@
             return $this->cache->remember($this->cacheKey($email), $this->ttl(), fn () => $this->service->isRealEmail($email));
         }
 
-        public function cacheKey(string $value): string
+        public function cacheKey(?string $value = null): string
         {
-            return $this->service->getServiceName().'_disposable_email_'.$value.'|email';
+            return $this->service->getServiceName().config('laravel-email-verify.cache.key') . $value;
         }
 
         public function ttl(): Carbon
         {
-            return now()->addMinutes(60);
+            return now()->addMinutes($this->cacheDuration);
         }
 
         /**

@@ -6,7 +6,7 @@
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter\BlockTemporaryEmailService;
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter\KickboxService;
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter\MailsService;
-    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter\UsercheckService;
+    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter\UserCheckService;
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter\VerifyRightService;
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter\ZeroBounceService;
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationServiceInterface;
@@ -40,7 +40,7 @@
             return match ($service) {
                 'mails' => new MailsService($baseUrl, $apiKey),
                 'kickbox' => new KickboxService($baseUrl, $apiKey),
-                'usercheck' => new UsercheckService($baseUrl, $apiKey),
+                'usercheck' => new UserCheckService($baseUrl, $apiKey),
                 'zerobounce' => new ZeroBounceService($baseUrl, $apiKey),
                 'verifyright' => new VerifyRightService($baseUrl, $apiKey),
                 'block-temporary-email' => new BlockTemporaryEmailService($baseUrl, $apiKey),

@@ -9,7 +9,7 @@
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationServiceInterface;
     use stdClass;
 
-    class UsercheckService implements EmailValidationServiceInterface
+    class UserCheckService implements EmailValidationServiceInterface
     {
         protected string $baseUrl;
         protected string $apiKey;

@@ -26,7 +26,7 @@ php artisan vendor:publish --provider="ErlandMuchasaj\LaravelEmailVerify\EmailVe
 ```
 
 Now you have access to the `laravel-email-verify.php` configuration file in the `config` directory. Here you can 
- configure which service to use for email verification. Defaults to 'kickbox'.
+ configure which service to use for email verification. Defaults to `kickbox`.
 
 The only thing you need to pay attention to is the  `connections` key where you need to set the token for the service you are using.
 
@@ -92,6 +92,12 @@ Example:
 // Using validation rule name:
 'email_field' => 'required|email|email_verify',
 ```
+
+### @todo: 
+### Add more services for email verification:
+- [istempmail](https://www.istempmail.com/)
+- [emaillistverify](https://emaillistverify.com/)
+- [mailboxvalidator](https://mailboxvalidator.com)
 
 ---
 

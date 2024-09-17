@@ -50,7 +50,7 @@ return [
     |
     */
 
-    'api_key' => env('INDISPOSABLE_KEY', 'live_106a7e8821e255c35b7969fc8ac557b455e6c88c896b468e2287f8f716b3472c'),
+    'api_key' => env('INDISPOSABLE_KEY', ''),
 
 
     /*
@@ -93,7 +93,7 @@ return [
     */
 
     'cache' => [
-        'enabled' => true,
+        'enabled' => env('INDISPOSABLE_CACHE', true),
         'store' => 'default',
         'key' => '_disposable_email_domains_',
     ],
@@ -119,50 +119,39 @@ return [
         'kickbox' => [
             'domain' => 'https://open.kickbox.io/v1/disposable/',
             'email' => 'https://api.eu.kickbox.com/v2/verify',
-            'key' => 'live_106a7e8821e255c35b7969fc8ac557b455e6c88c896b468e2287f8f716b3472c',
+            'key' => env('INDISPOSABLE_KEY'),
         ],
 
         'usercheck' => [
             'domain' => 'https://api.usercheck.com/domain',
             'email' => 'https://api.usercheck.com/email',
-            'key' => 'bEFiqX0MKQvORHX2jBwnCa1tNRhFlfvY',
+            'key' => env('INDISPOSABLE_KEY'),
         ],
 
         'mails' => [
             'domain' => 'https://api.mails.so/v1/validate',
             'email' => 'https://api.mails.so/v1/validate',
-            'key' => '66815588-7953-4d58-9020-1dbbe545c008',
+            'key' => env('INDISPOSABLE_KEY'),
         ],
 
         'block-temporary-email' => [
             'domain' => 'https://block-temporary-email.com/check/domain',
             'email' => 'https://block-temporary-email.com/check/email',
-            'key' => 'HFL4ZzPGlYaxJimbPlERn1MA067ENAvx8KhH50CQ',
+            'key' => env('INDISPOSABLE_KEY'),
         ],
 
         'zerobounce' => [
             'domain' => 'https://api.zerobounce.net/v2/validate',
             'email' => 'https://api.zerobounce.net/v2/validate',
-            'key' => '7dc5df71a3784a7cb1954e775975b71e',
+            'key' => env('INDISPOSABLE_KEY'),
         ],
 
         'verifyright' => [
             'domain' => 'https://verifyright.co/verify/',
             'email' => 'https://verifyright.co/verify/',
-            'key' => '92928b756e623357b3bd80e8dc90deaeadec5c3d500dd8999bd683405ffc562de1e0fb9f887c363007206ac32b640f24',
+            'key' => env('INDISPOSABLE_KEY'),
         ],
 
-//            'mailboxvalidator' => [
-//                'domain' => 'https://api.mailboxvalidator.com/v2/validation/single',
-//                'email' => 'https://api.mailboxvalidator.com/v2/validation/single',
-//                'key' => '7dc5df71a3784a7cb1954e775975b71e',
-//            ],
-//
-//            'emaillistverify' => [
-//                'domain' => 'https://apps.emaillistverify.com/api/verifyEmail',
-//                'email' => 'https://apps.emaillistverify.com/api/verifyEmail',
-//                'key' => '7dc5df71a3784a7cb1954e775975b71e',
-//            ],
     ],
 
 ];
