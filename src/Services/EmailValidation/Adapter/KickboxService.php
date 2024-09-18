@@ -34,7 +34,7 @@
                     'Authorization' => 'token ' . $this->apiKey,
                     'Content-Type' => 'application/json; charset=utf-8',
                     'Accept' => 'application/json',
-                    'User-Agent' => 'kickbox-php/3.0.0 (https://github.com/kickboxio/kickbox-php)',
+                    'User-Agent' => 'laravel-email-verify/1.0.0 (https://github.com/erlandmuchasaj/laravel-email-verify)',
                 ],
             ];
 
