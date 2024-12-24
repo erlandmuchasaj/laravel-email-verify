@@ -55,11 +55,8 @@
 
         public function isDisposable(mixed $response): bool
         {
-            if (! $response->status ) {
-                return true;
-            }
-
-            return false;
+            // status `true` mains email is not disposable.
+            return ! $response->status;
         }
 
     }

@@ -30,19 +30,26 @@
 
                 $responseBody = Utils::jsonDecode($response->getBody()->getContents());
 
-                dump($responseBody);
-
                 return ! $this->isDisposable($responseBody);
             } catch (RequestException | GuzzleException $e) {
-                dump($e);
+
                 report($e);
+
                 return true; // Assume true if there's an error
             }
         }
 
         public function isDisposable(mixed $response): bool
         {
-            return $response->blocked ?? false;
+            if ($response->blocked) {
+                return true; // The email is disposable
+            }
+
+            if (isset($response->unresolvable) && $response->unresolvable) {
+                return true; // Domain is OK, but email is invalid
+            }
+
+            return false; // Email is not disposable
         }
 
     }
