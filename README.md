@@ -95,7 +95,6 @@ Example:
 
 ### @todo: 
 ### Add more services for email verification:
-- [istempmail](https://www.istempmail.com/)
 - [emaillistverify](https://emaillistverify.com/)
 - [mailboxvalidator](https://mailboxvalidator.com)
 
