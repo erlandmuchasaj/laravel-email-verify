@@ -2,24 +2,14 @@
 
     namespace ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter;
 
+    use GuzzleHttp\Utils;
     use GuzzleHttp\Client;
     use GuzzleHttp\Exception\GuzzleException;
     use GuzzleHttp\Exception\RequestException;
-    use GuzzleHttp\Utils;
-    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationServiceInterface;
+    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationBase;
 
-    class ZeroBounceService implements EmailValidationServiceInterface
+    class ZeroBounceService extends EmailValidationBase
     {
-        protected string $baseUrl;
-        protected string $apiKey;
-        protected Client $client;
-
-        public function __construct(string $baseUrl, string $apiKey)
-        {
-            $this->baseUrl = $baseUrl;
-            $this->apiKey = $apiKey;
-        }
-
         public function initializeClient(): Client
         {
             if (isset($this->client)) {
@@ -75,8 +65,4 @@
             return false;
         }
 
-        public function getServiceName(): string
-        {
-            return 'zerobounce';
-        }
     }

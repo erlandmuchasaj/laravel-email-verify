@@ -6,20 +6,10 @@
     use GuzzleHttp\Utils;
     use GuzzleHttp\Exception\GuzzleException;
     use GuzzleHttp\Exception\RequestException;
-    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationServiceInterface;
+    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationBase;
 
-    class KickboxService implements EmailValidationServiceInterface
+    class KickboxService extends EmailValidationBase
     {
-        protected string $baseUrl;
-        protected string $apiKey;
-        protected Client $client;
-
-        public function __construct(string $baseUrl, string $apiKey)
-        {
-            $this->baseUrl = $baseUrl;
-            $this->apiKey = $apiKey;
-        }
-
         public function initializeClient(): Client
         {
             if (isset($this->client)) {
@@ -65,11 +55,6 @@
         {
             return $response->result === 'undeliverable' ||
                 ($response->result === 'risky' && $response->disposable);
-        }
-
-        public function getServiceName(): string
-        {
-            return 'kickbox';
         }
 
     }

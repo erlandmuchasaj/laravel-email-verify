@@ -2,25 +2,15 @@
 
     namespace ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter;
 
+    use stdClass;
+    use GuzzleHttp\Utils;
     use GuzzleHttp\Client;
     use GuzzleHttp\Exception\GuzzleException;
     use GuzzleHttp\Exception\RequestException;
-    use GuzzleHttp\Utils;
-    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationServiceInterface;
-    use stdClass;
+    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationBase;
 
-    class BlockTemporaryEmailService implements EmailValidationServiceInterface
+    class BlockTemporaryEmailService extends EmailValidationBase
     {
-        protected string $baseUrl;
-        protected string $apiKey;
-        protected Client $client;
-
-        public function __construct(string $baseUrl, string $apiKey)
-        {
-            $this->baseUrl = $baseUrl;
-            $this->apiKey = $apiKey;
-        }
-        
         public function initializeClient(): Client
         {
             if (isset($this->client)) {
@@ -65,11 +55,6 @@
                 $res->status == 400, $res->disposable == true, $res->mx == false => true,
                 default => false,
             };
-        }
-
-        public function getServiceName(): string
-        {
-            return 'block-temporary-email';
         }
 
         private function formatResponse(mixed $data): stdClass

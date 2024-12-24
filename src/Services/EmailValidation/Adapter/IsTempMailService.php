@@ -2,13 +2,13 @@
 
     namespace ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter;
 
-    use GuzzleHttp\Utils;
     use GuzzleHttp\Client;
+    use GuzzleHttp\Utils;
     use GuzzleHttp\Exception\GuzzleException;
     use GuzzleHttp\Exception\RequestException;
     use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationBase;
 
-    class VerifyRightService extends EmailValidationBase
+    class IsTempMailService extends EmailValidationBase
     {
         public function initializeClient(): Client
         {
@@ -16,15 +16,9 @@
                 return $this->client;
             }
 
-            $options = [
-                'base_uri' => rtrim($this->baseUrl, '/\\') . '/',
-                'headers' => [
-                    'Content-Type' => 'application/json; charset=utf-8',
-                    'Accept' => 'application/json'
-                ],
-            ];
-            
-            $this->client = new Client($options);
+            $this->client = new Client([
+              'base_uri' => rtrim($this->baseUrl, '/\\') . '/',
+            ]);
 
             return $this->client;
         }
@@ -32,22 +26,15 @@
         public function isRealEmail(string $email): bool
         {
             try {
-                $response = $this->initializeClient()->get($email, ['query' => [
-                    'token' => $this->apiKey,
-                ]]);
+                $response = $this->initializeClient()->get($this->apiKey . '/' .$email);
 
                 $responseBody = Utils::jsonDecode($response->getBody()->getContents());
 
+                dump($responseBody);
+
                 return ! $this->isDisposable($responseBody);
             } catch (RequestException | GuzzleException $e) {
-                if  ($e->hasResponse()) {
-                    $resultError = Utils::jsonDecode($e->getResponse()->getBody()->getContents());
-
-                    report("VerifyRightService: {$resultError->error->message}");
-
-                    return $resultError->status;
-                }
-
+                dump($e);
                 report($e);
                 return true; // Assume true if there's an error
             }
@@ -55,11 +42,7 @@
 
         public function isDisposable(mixed $response): bool
         {
-            if (! $response->status ) {
-                return true;
-            }
-
-            return false;
+            return $response->blocked ?? false;
         }
 
     }

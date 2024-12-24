@@ -18,7 +18,7 @@
                 $isValid = false;
             } elseif (
                 is_string($matches['local'])
-                && strlen($matches['local']) + strlen((string) $matches['domain']) > 253
+                && strlen($matches['local']) + strlen($matches['domain']) > 253
             ) {
                 // There is a restriction in RFC 2821 on the length of an address in MAIL and RCPT commands
                 // of 254 characters. Since addresses that do not fit in those fields are not normally useful, the

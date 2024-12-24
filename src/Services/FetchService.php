@@ -64,7 +64,7 @@
                 throw new UnexpectedValueException('JSON decoding error: ' . json_last_error_msg());
             }
 
-            if (empty($jsonData)) {
+            if (blank($jsonData)) {
                 throw new UnexpectedValueException('Decoded JSON data is empty or invalid.');
             }
 

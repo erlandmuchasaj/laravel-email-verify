@@ -4,20 +4,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Email verifier
-    |--------------------------------------------------------------------------
-    |
-    | This option controls the default verifier that is used to verify any email
-    |
-    | Supported: "kickbox", "usercheck", "mails", "block-temporary-email", "zerobounce"
-    |            "verifyright", "mailboxvalidator", "emaillistverify"
-    */
-
-    'default' => env('INDISPOSABLE_SERVICE', 'kickbox'),
-
-
-    /*
-    |--------------------------------------------------------------------------
     | Master Switch
     |--------------------------------------------------------------------------
     |
@@ -27,6 +13,36 @@ return [
 
     'enabled' => env('INDISPOSABLE_ENABLED', true),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Enable Services search.
+    |--------------------------------------------------------------------------
+    |
+    | This option may be used to disable email verifier using 3rd party services
+    |
+    | If set to false, the package will verify email only to the blacklist
+    | email and will not hit any service provider endpoint.
+    |
+    */
+
+    'use_service' => env('INDISPOSABLE_USE_SERVICE', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Email verifier
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the default verifier that is used to verify any email
+    |
+    | Supported: "kickbox", "user-check", "mails", "block-temporary-email",
+    |            "zero-bounce", "verify-right", "is-temp-mail",
+    |            -- "mailboxvalidator", "emaillistverify", null
+    |
+    | Defaults: kickbox
+    |
+    */
+
+    'default' => env('INDISPOSABLE_SERVICE', 'kickbox'),
 
     /*
     |--------------------------------------------------------------------------
@@ -110,19 +126,16 @@ return [
     | You will specify which one you are using for your
     | email verifier below. You are free to add additional mailers as required.
     |
-    | Supported: "kickbox", "usercheck", "mails", "block-temporary-email", "zerobounce"
-    |            "verifyright", "mailboxvalidator", "emaillistverify"
-    |
     */
 
     'connections' => [
         'kickbox' => [
             'domain' => 'https://open.kickbox.io/v1/disposable/',
-            'email' => 'https://api.eu.kickbox.com/v2/verify',
+            'email' => 'https://api.kickbox.com/v2/verify',
             'key' => env('INDISPOSABLE_KEY'),
         ],
 
-        'usercheck' => [
+        'user-check' => [
             'domain' => 'https://api.usercheck.com/domain',
             'email' => 'https://api.usercheck.com/email',
             'key' => env('INDISPOSABLE_KEY'),
@@ -140,16 +153,22 @@ return [
             'key' => env('INDISPOSABLE_KEY'),
         ],
 
-        'zerobounce' => [
+        'zero-bounce' => [
             'domain' => 'https://api.zerobounce.net/v2/validate',
             'email' => 'https://api.zerobounce.net/v2/validate',
             'key' => env('INDISPOSABLE_KEY'),
         ],
 
-        'verifyright' => [
+        'verify-right' => [
             'domain' => 'https://verifyright.co/verify/',
             'email' => 'https://verifyright.co/verify/',
             'key' => env('INDISPOSABLE_KEY'),
+        ],
+
+        'is-temp-mail' => [
+          'domain' => 'https://www.istempmail.com/api/check/',
+          'email' => 'https://www.istempmail.com/api/check/',
+          'key' => env('INDISPOSABLE_KEY'),
         ],
 
     ],

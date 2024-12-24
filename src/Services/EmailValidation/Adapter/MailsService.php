@@ -2,24 +2,14 @@
 
     namespace ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Adapter;
 
-    use GuzzleHttp\Client;
     use GuzzleHttp\Utils;
+    use GuzzleHttp\Client;
     use GuzzleHttp\Exception\GuzzleException;
     use GuzzleHttp\Exception\RequestException;
-    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationServiceInterface;
+    use ErlandMuchasaj\LaravelEmailVerify\Services\EmailValidation\Contracts\EmailValidationBase;
 
-    class MailsService implements EmailValidationServiceInterface
+    class MailsService extends EmailValidationBase
     {
-        protected string $baseUrl;
-        protected string $apiKey;
-        protected Client $client;
-
-        public function __construct(string $baseUrl, string $apiKey)
-        {
-            $this->baseUrl = $baseUrl;
-            $this->apiKey = $apiKey;
-        }
-
         public function initializeClient(): Client
         {
             if (isset($this->client)) {
@@ -70,8 +60,4 @@
             return (bool) $response->data?->is_disposable;
         }
 
-        public function getServiceName(): string
-        {
-            return 'mails';
-        }
     }

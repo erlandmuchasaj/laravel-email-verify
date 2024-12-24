@@ -43,7 +43,7 @@
             $emailListPath = config('laravel-email-verify.storage');
 
             if (!\file_exists($emailListPath) || !\is_readable($emailListPath)) {
-                throw new InvalidArgumentException('The disposable email domains file is not readable or does not exist: ' . $emailListPath .'. Run `php artisan email-verify:update` to update the list.');
+                throw new InvalidArgumentException('The disposable email domains file is not readable or does not exist: ' . $emailListPath .'. Run `php artisan email-verify:update-disposable-domains` to update the list.');
             }
 
             $fileContents = \file_get_contents($emailListPath);

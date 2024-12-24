@@ -23,6 +23,11 @@ class EmailVerifyServiceProvider extends ServiceProvider
         );
     }
 
+    /**
+     * Bootstrap the application services.
+     * In general is a good practice that in providers not to use helpers
+     * but to use Laravel app container to access the data such as config, cache, etc.
+     */
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
@@ -45,6 +50,7 @@ class EmailVerifyServiceProvider extends ServiceProvider
 
         // register the custom validation rule after app is booted.
         $this->app->booted(function($app) {
+
             // get validator and translator
             $validator = $app['validator'];
             $translator = $app['translator'];

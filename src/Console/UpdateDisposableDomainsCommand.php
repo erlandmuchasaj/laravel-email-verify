@@ -14,22 +14,24 @@
         public function handle(): int
         {
             $source = config('laravel-email-verify.source');
-            if (empty($source)) {
-                $this->error('Source URLs should be defined and not empty in the configuration file.');
+            $storage = config('laravel-email-verify.storage');
+
+            if (blank($source)) {
+                $this->error(__('Source URLs should be defined and not empty in the configuration file.'));
                 return Command::FAILURE;
             }
 
-            $this->line('Fetching from source...');
+            $this->line(__('Fetching from source: :url.', ['url' => $source]));
 
             $fetchService = new FetchService();
 
             $data = $this->laravel->call([$fetchService, 'handle'], ['url' => $source]);
 
-            $this->info('Saving list to storage!');
+            $this->info(__('Saving list to storage: :storage.', ['storage' => $storage]));
 
-            $fetchService->saveToStorage($data, config('laravel-email-verify.storage'));
+            $fetchService->saveToStorage($data, $storage);
 
-            $this->info('Disposable domains list updated successfully!');
+            $this->info(__('Disposable domains list updated successfully!'));
 
             Cache::forget(config('laravel-email-verify.cache.key'));
 
