@@ -73,8 +73,19 @@ class EmailVerifyServiceProvider extends ServiceProvider
                 $indisposable = new Indisposable($cache ?? null);
 
                 return $indisposable->validate($attribute, $value, $parameters, $validator);
+            });
 
-            }, $translator->get(static::$abstract . '::validation.email_verify'));
+            // Add a replacer that gets the translation message at runtime
+            $validator->replacer('email_verify', function ($message, $attribute, $rule, $parameters) use ($app) {
+                $translatedMessage = $app['translator']->get(static::$abstract.'::validation.email_verify');
+
+                // Get the custom attribute name if defined in validation.php attributes array
+                $customAttributes = $app['translator']->get('validation.attributes');
+                $attributeName = $customAttributes[$attribute] ?? $attribute;
+
+                // Replace the attribute placeholder with the translated attribute name
+                return str_replace(':attribute', $attributeName, $translatedMessage);
+            });
         });
     }
 
